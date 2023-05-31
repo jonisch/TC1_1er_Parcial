@@ -6,31 +6,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Repositories.SQL
+namespace DAL.Repositories.Memory
 {
-    internal class CustomerRepository : IGenericRepository<Customer>
+    internal class SaleRepository : IGenericRepository<Sale>
     {
         public void Delete(Guid Id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Customer> GetAll()
+        public List<Sale> GetAll()
+        {
+            List<Sale> Sale=new List<Sale>();
+
+            return Sale;
+        }
+
+        public Sale GetOne(Guid Id)
         {
             throw new NotImplementedException();
         }
 
-        public Customer GetOne(Guid Id)
+        public void Insert(Sale obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Insert(Customer obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Guid Id, Customer obj)
+        public void Update(Guid Id, Sale obj)
         {
             throw new NotImplementedException();
         }
