@@ -14,7 +14,7 @@ namespace ConsoleApp.Dominio
         {
         }
 
-        public override double CostoBoleto()=> base.CostoEmbarque + ValorBoletoEjecutivo;
+        public override double CostoBoleto()=> (base.CostoEmbarque + ValorBoletoEjecutivo);
        
     }
 }
