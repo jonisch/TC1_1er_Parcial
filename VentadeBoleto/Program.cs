@@ -1,4 +1,6 @@
-﻿using ConsoleApp.Servicios;
+﻿using ConsoleApp.Dominio;
+using ConsoleApp.Dominio.Excepciones;
+using ConsoleApp.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,52 +19,45 @@ namespace VentadeBoleto
             Console.WriteLine("###### Venta de Boleto ######"); 
             Console.WriteLine("#############################");
             Console.WriteLine(" ");
+            Console.WriteLine("Ingresar Fecha de Salida (dd/mm/aaaa)");
+            var fechaSalida = Console.ReadLine();
+            Console.WriteLine("Ingresar Fecha de Regreso (dd/mm/aaaa)");
+            var fechaRegreso = Console.ReadLine();
+
+
+                DateTime FSalida = DateTime.Parse(fechaSalida);
+                DateTime FRegreso = DateTime.Parse(fechaRegreso);
+
+
+
+
             Console.WriteLine("Seleccione el tipo de Voleto");
             Console.WriteLine("1) Boleto Ejecutivo");
             Console.WriteLine("2) Boleto Turista");
             var Seleccion = Console.ReadLine();
-            Console.WriteLine(" ");
-            Console.WriteLine("Ingresar Dia de Salida");
-            var Dia = Console.ReadLine();
-            Console.WriteLine(" ");
-            Console.WriteLine("Ingresar Mes de Salida");
-            var Mes = Console.ReadLine();
-            Console.WriteLine(" ");
-            Console.WriteLine("Ingresar Día de Regreso");
-            var DRegreso = Console.ReadLine();
-            Console.WriteLine(" ");
-            string Salida = Dia+"/"+Mes+"/"+DateTime.Now.Year;
-            DateTime FSalida = DateTime.Parse(Salida);
-            int ResultDia = Int32.Parse(Dia);
-            int ResultDRegreso = Int32.Parse(DRegreso);
-            //Menu
-
-           // Console.WriteLine("Ingresar Cantidad de Boletos");
-           // var Cantidad = Console.ReadLine();
-           // int ResultCantidad = Int32.Parse(Cantidad);
-
             var Repository = ServiceProvider.RepositorioBoleto;
+            Boleto NuevoBoleto = null;
+
+            switch (Seleccion)
+            {
+                case "1":
+                    NuevoBoleto = Repository.GetNewBoletoEjecutivo(FSalida);
+                    break;
+                case "2":
+                    NuevoBoleto = Repository.GetNewBoletoTurista(FSalida);
+                    break;
+                default:
+                    Console.WriteLine("Operación Incorrecta. Verificar!");
+                    Console.ReadLine();
+                    return;
+            }
            
-            if (Seleccion == "1")
-            {
-                var NuevoBoletoEjecutivo = Repository.GetNewBoletoEjecutivo(FSalida);
-                NuevoBoletoEjecutivo.TiempoEnDias = ResultDRegreso-ResultDia;
-                Console.WriteLine("Numero de Boleto:" + NuevoBoletoEjecutivo.Numero);
-                Console.WriteLine("Fecha de Salda:" + NuevoBoletoEjecutivo.FechaSalida);
-                Console.WriteLine("Fecha de Regreso:" + NuevoBoletoEjecutivo.CalcularRegreso());
-                Console.WriteLine("Costo Total:" + NuevoBoletoEjecutivo.CostoBoleto());
-            };
-
-            if (Seleccion == "2")
-            {
-                var NuevoBoletoTurista = Repository.GetNewBoletoTurista(FSalida);
-                NuevoBoletoTurista.TiempoEnDias = ResultDRegreso - ResultDia;
-                Console.WriteLine("Numero de Boleto:" + NuevoBoletoTurista.Numero);
-                Console.WriteLine("Fecha de Salda:" + NuevoBoletoTurista.FechaSalida);
-                Console.WriteLine("Fecha de Regreso:" + NuevoBoletoTurista.CalcularRegreso());
-                Console.WriteLine("Costo Total:" + NuevoBoletoTurista.CostoBoleto());
-            };
-
+            NuevoBoleto.TiempoEnDias = (int)(FRegreso - FSalida).TotalDays;
+            Console.WriteLine("Numero de Boleto:" + NuevoBoleto.Numero);
+            Console.WriteLine("Fecha de Salda:" + NuevoBoleto.FechaSalida);
+            Console.WriteLine("Fecha de Regreso:" + NuevoBoleto.CalcularRegreso());
+            Console.WriteLine("Cantidad de días:" + NuevoBoleto.TiempoEnDias);
+            Console.WriteLine("Costo Total:" + NuevoBoleto.CostoBoleto());
 
             Console.ReadLine();
             

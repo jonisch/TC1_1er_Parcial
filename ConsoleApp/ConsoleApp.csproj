@@ -45,15 +45,19 @@
     <Compile Include="Dominio\Boleto.cs" />
     <Compile Include="Dominio\BoletoEjecutivo.cs" />
     <Compile Include="Dominio\BoletoTurista.cs" />
+    <Compile Include="Dominio\Excepciones\FechaInvalidaException.cs" />
     <Compile Include="Dominio\IRepositorioBoleto.cs" />
     <Compile Include="Dominio\TipoBoleto.cs" />
     <Compile Include="Infraestructura\Repositorios\BoletoMemoryRepository.cs" />
+    <Compile Include="Infraestructura\Repositorios\BoletoSQLRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\ServiceProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Infraestructura\Factory\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
