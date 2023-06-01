@@ -24,9 +24,26 @@ namespace ConsoleApp.Infraestructura.Repositorios
             return boletos;
         }
 
-        public Boleto GetNew()
+        private int ObtenerMayor()
         {
-            throw new NotImplementedException();
+            var mayor = 0;
+            foreach (var boleto in boletos)
+            {
+                if (boleto.Numero > mayor)
+                    mayor = boleto.Numero;
+            }
+            return mayor + 1;
+        }
+        public Boleto GetNewBoletoTurista(DateTime dateTime)
+        {
+            var Numero = ObtenerMayor();
+            return new BoletoTurista(Numero, dateTime);
+        }
+
+        public Boleto GetNewBoletoEjecutivo(DateTime dateTime)
+        {
+            var Numero = ObtenerMayor();
+            return new BoletoEjecutivo(Numero, dateTime);
         }
 
         public Boleto GetOne(int Numero)

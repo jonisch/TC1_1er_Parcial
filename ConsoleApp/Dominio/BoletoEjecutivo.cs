@@ -10,11 +10,11 @@ namespace ConsoleApp.Dominio
     {
         private int ValorBoletoEjecutivo = 9800;
 
-        public BoletoEjecutivo(int Numero) : base(Numero)
+        public BoletoEjecutivo(int Numero, DateTime dateTime) : base(Numero, dateTime)
         {
         }
 
-        internal override double CostoBoleto()=> base.CostoEmbarque + ValorBoletoEjecutivo;
+        public override double CostoBoleto()=> base.CostoEmbarque + ValorBoletoEjecutivo;
        
     }
 }

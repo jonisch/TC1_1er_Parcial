@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Dominio
 {
-    internal interface IRepositorioBoleto
+    public interface IRepositorioBoleto
     {
         void Insert(Boleto boleto);
         void Update(int Numero, Boleto boleto);
         void Delete(int Numero);
         List<Boleto> GetAll();
         Boleto GetOne(int Numero);
-        Boleto GetNew();
+        Boleto GetNewBoletoTurista(DateTime dateTime);
+        Boleto GetNewBoletoEjecutivo(DateTime dateTime);
     }
 }

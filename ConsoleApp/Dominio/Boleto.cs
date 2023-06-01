@@ -7,22 +7,23 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Dominio
 {
-    internal abstract class Boleto
+    public abstract class Boleto
     {
         public double CostoEmbarque { get; set; }
-        public  DateTime FechaSalida{ get; set; }
+        public  DateTime FechaSalida{ get; }
         public int Numero { get; }
         public int TiempoEnDias { get; set; }
 
 
-        public Boleto(int Numero)
+        public Boleto(int Numero, DateTime dateTime)
         {
             this.Numero = Numero;
             this.CostoEmbarque = 9950;
+            this.FechaSalida = dateTime;
         }
 
-        internal DateTime CalcularRegreso() => FechaSalida.AddDays(TiempoEnDias);
+        public DateTime CalcularRegreso() => FechaSalida.AddDays(TiempoEnDias);
 
-        internal abstract double CostoBoleto();
+        public abstract double CostoBoleto();
     }
 }

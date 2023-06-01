@@ -30,17 +30,17 @@ namespace DAL.Factory
 			Backend = ConfigurationManager.AppSettings["Backend"];
 		}
 
-		public IGenericRepository<Sale> GetSaleRepository()
-		{
-			if (Backend == "Memory")
-			{
-				return new Repositories.Memory.SaleRepository();
-			}
-			else
-			{
-				return new Repositories.SQL.SaleRepository();
-			}
-		}
+		//public IGenericRepository<Sale> GetSaleRepository()
+		//{
+		//	if (Backend == "Memory")
+		//	{
+		//		return new Repositories.Memory.SaleRepository();
+		//	}
+		//	else
+		//	{
+		//		return new Repositories.SQL.SaleRepository();
+		//	}
+		//}
 	}
 
 }

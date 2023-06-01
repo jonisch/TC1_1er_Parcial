@@ -1,4 +1,5 @@
 ﻿using ConsoleApp.Dominio;
+using ConsoleApp.Infraestructura.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Servicios
 {
-    internal static class ServiceProvider
+    public static class ServiceProvider
     {
-        internal static IRepositorioBoleto RepositorioBoleto=
+        public static IRepositorioBoleto RepositorioBoleto= new BoletoMemoryRepository();
 
     }
 }
