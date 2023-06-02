@@ -9,7 +9,12 @@ namespace ConsoleApp.Infraestructura.Repositorios
 {
     internal class BoletoMemoryRepository : IRepositorioBoleto
     {
-        private List<Boleto> boletos=new List<Boleto>();
+        private List<Boleto> boletos;
+        public BoletoMemoryRepository()
+        {
+            boletos=new List<Boleto>();
+            boletos.Add(new BoletoTurista(5, DateTime.Now, 10)); //PRUEBA DE INCREMENTO O VARIACION DEL NUMERO DE BOLETO
+        }
         public void Delete(int Numero)
         {
             var boleto=GetOne(Numero);

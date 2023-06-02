@@ -19,35 +19,66 @@ namespace VentadeBoleto
             Console.WriteLine("###### Venta de Boleto ######"); 
             Console.WriteLine("#############################");
             Console.WriteLine(" ");
-            Console.WriteLine("Ingresar Fecha de Salida (dd/mm/aaaa)");
-            var fechaSalida = Console.ReadLine();
-            Console.WriteLine("Ingresar Dias (Tiempo en Días)");
-            var TiempoEnDias = Console.ReadLine();
+
+            try
+            {
+                Console.WriteLine("Ingresar Fecha de Salida (dd/mm/aaaa)");
+                var fechaSalida = ObtenerFechaSalida();
+                Console.WriteLine("Ingresar Dias (Tiempo en Días)");
+                var TiempoEnDias = ObtenerTiempoEnDias();
+                Console.WriteLine("Seleccione el tipo de Voleto");
+                Console.WriteLine("1) Boleto Ejecutivo");
+                Console.WriteLine("2) Boleto Turista");
+                var TipoBoleto = Console.ReadLine();
+                var Service = ServiceProvider.ServiceVenta;
+                var NuevoBoleto = Service.VentaBoleto(fechaSalida, TiempoEnDias, TipoBoleto);
+
+                Console.WriteLine("Numero de Boleto:" + NuevoBoleto.Numero);
+                Console.WriteLine("Fecha de Salda:" + NuevoBoleto.FechaSalida);
+                Console.WriteLine("Fecha de Regreso:" + NuevoBoleto.CalcularRegreso());
+                Console.WriteLine("Cantidad de días:" + NuevoBoleto.TiempoEnDias);
+                Console.WriteLine("Costo Total $:" + NuevoBoleto.CostoBoleto());
+
+                //List<Boleto> ListaBoletos = Service.ObtenerTodosLosBoletos();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
 
-
-
-
-
-
-            Console.WriteLine("Seleccione el tipo de Voleto");
-            Console.WriteLine("1) Boleto Ejecutivo");
-            Console.WriteLine("2) Boleto Turista");
-            var TipoBoleto = Console.ReadLine();
-            var Service = ServiceProvider.ServiceVenta;
-            var NuevoBoleto = Service.VentaBoleto(fechaSalida, TiempoEnDias, TipoBoleto);
-           
-
-            Console.WriteLine("Numero de Boleto:" + NuevoBoleto.Numero);
-            Console.WriteLine("Fecha de Salda:" + NuevoBoleto.FechaSalida);
-            Console.WriteLine("Fecha de Regreso:" + NuevoBoleto.CalcularRegreso());
-            Console.WriteLine("Cantidad de días:" + NuevoBoleto.TiempoEnDias);
-            Console.WriteLine("Costo Total:" + NuevoBoleto.CostoBoleto());
 
             Console.ReadLine();
             
         }
 
-        
+        private static DateTime ObtenerFechaSalida()
+        {
+            try
+            {
+                return DateTime.Parse(Console.ReadLine());
+
+            }
+            catch (Exception)
+            {
+
+                throw new FechaInvalidaException("Fecha Inválida");
+            }
+
+        }
+
+        private static int ObtenerTiempoEnDias()
+        {
+            try
+            {
+                return int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+
+                throw new NumeroInvalidoException("Número Inválido");
+            }
+        }
+
     }
 }

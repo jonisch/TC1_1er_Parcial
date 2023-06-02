@@ -16,18 +16,16 @@ namespace ConsoleApp.Servicios
             this.Repositorio = Repositorio;
         }
 
-        public Boleto VentaBoleto(string FechaSalida, string TiempoEnDias, string TipoBoleto)
+        public Boleto VentaBoleto(DateTime FechaSalida, int TiempoEnDias, string TipoBoleto)
         {
-            DateTime FSalida = ObtenerFechaSalida(FechaSalida);
-            int Dias = ObtenerTiempoEnDias(TiempoEnDias);
 
             switch (TipoBoleto)
             {
                 case "1":
-                    return GetNewBoletoEjecutivo(FSalida, Dias);
+                    return GetNewBoletoEjecutivo(FechaSalida, TiempoEnDias);
 
                 case "2":
-                    return GetNewBoletoTurista(FSalida, Dias);
+                    return GetNewBoletoTurista(FechaSalida, TiempoEnDias);
 
                 default:
                     Console.WriteLine("Operación Incorrecta. Verificar!");
@@ -36,38 +34,9 @@ namespace ConsoleApp.Servicios
             }
         }
 
-        private static int ObtenerTiempoEnDias(string TiempoEnDias)
-        {
-            int Dias;
-            try
-            {
-                Dias = int.Parse(TiempoEnDias);
-            }
-            catch (Exception)
-            {
+     
 
-                throw new NumeroInvalidoException("Número Inválido");
-            }
-
-            return Dias;
-        }
-
-        private static DateTime ObtenerFechaSalida(string FechaSalida)
-        {
-            DateTime FSalida;
-            try
-            {
-                FSalida = DateTime.Parse(FechaSalida);
-
-            }
-            catch (Exception)
-            {
-
-                throw new FechaInvalidaException("Fecha Inválida");
-            }
-
-            return FSalida;
-        }
+ 
 
         public Boleto GetNewBoletoTurista(DateTime dateTime, int dias)
         {
@@ -79,6 +48,11 @@ namespace ConsoleApp.Servicios
         {
             var Numero = Repositorio.ObtenerUltimoNumero();
             return new BoletoEjecutivo(Numero, dateTime, dias);
+        }
+
+        public List<Boleto> ObtenerTodosLosBoletos()
+        {
+            return Repositorio.GetAll();
         }
     }
 }
