@@ -13,7 +13,6 @@ namespace ConsoleApp.Dominio
         void Delete(int Numero);
         List<Boleto> GetAll();
         Boleto GetOne(int Numero);
-        Boleto GetNewBoletoTurista(DateTime dateTime);
-        Boleto GetNewBoletoEjecutivo(DateTime dateTime);
+        int ObtenerUltimoNumero();
     }
 }

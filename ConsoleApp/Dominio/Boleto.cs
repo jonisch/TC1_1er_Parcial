@@ -15,11 +15,12 @@ namespace ConsoleApp.Dominio
         public int TiempoEnDias { get; set; }
 
 
-        public Boleto(int Numero, DateTime dateTime)
+        public Boleto(int Numero, DateTime dateTime, int dias)
         {
             this.Numero = Numero;
             this.CostoEmbarque = 9950;
             this.FechaSalida = dateTime;
+            this.TiempoEnDias= dias;
         }
 
         public DateTime CalcularRegreso() => FechaSalida.AddDays(TiempoEnDias);

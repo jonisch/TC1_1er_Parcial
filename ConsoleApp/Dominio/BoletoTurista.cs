@@ -10,7 +10,7 @@ namespace ConsoleApp.Dominio
     {
         private int ValorBoletoTurista = 8400;
 
-        public BoletoTurista(int Numero, DateTime dateTime) : base(Numero, dateTime)
+        public BoletoTurista(int Numero, DateTime dateTime, int dias) : base(Numero, dateTime, dias)
         {
         }
 

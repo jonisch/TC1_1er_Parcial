@@ -21,12 +21,11 @@ namespace VentadeBoleto
             Console.WriteLine(" ");
             Console.WriteLine("Ingresar Fecha de Salida (dd/mm/aaaa)");
             var fechaSalida = Console.ReadLine();
-            Console.WriteLine("Ingresar Fecha de Regreso (dd/mm/aaaa)");
-            var fechaRegreso = Console.ReadLine();
+            Console.WriteLine("Ingresar Dias (Tiempo en Días)");
+            var TiempoEnDias = Console.ReadLine();
 
 
-                DateTime FSalida = DateTime.Parse(fechaSalida);
-                DateTime FRegreso = DateTime.Parse(fechaRegreso);
+
 
 
 
@@ -34,25 +33,11 @@ namespace VentadeBoleto
             Console.WriteLine("Seleccione el tipo de Voleto");
             Console.WriteLine("1) Boleto Ejecutivo");
             Console.WriteLine("2) Boleto Turista");
-            var Seleccion = Console.ReadLine();
-            var Repository = ServiceProvider.RepositorioBoleto;
-            Boleto NuevoBoleto = null;
-
-            switch (Seleccion)
-            {
-                case "1":
-                    NuevoBoleto = Repository.GetNewBoletoEjecutivo(FSalida);
-                    break;
-                case "2":
-                    NuevoBoleto = Repository.GetNewBoletoTurista(FSalida);
-                    break;
-                default:
-                    Console.WriteLine("Operación Incorrecta. Verificar!");
-                    Console.ReadLine();
-                    return;
-            }
+            var TipoBoleto = Console.ReadLine();
+            var Service = ServiceProvider.ServiceVenta;
+            var NuevoBoleto = Service.VentaBoleto(fechaSalida, TiempoEnDias, TipoBoleto);
            
-            NuevoBoleto.TiempoEnDias = (int)(FRegreso - FSalida).TotalDays;
+
             Console.WriteLine("Numero de Boleto:" + NuevoBoleto.Numero);
             Console.WriteLine("Fecha de Salda:" + NuevoBoleto.FechaSalida);
             Console.WriteLine("Fecha de Regreso:" + NuevoBoleto.CalcularRegreso());

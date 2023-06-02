@@ -19,22 +19,17 @@ namespace ConsoleApp.Infraestructura.Repositorios
             throw new NotImplementedException();
         }
 
-        public Boleto GetNewBoletoEjecutivo(DateTime dateTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Boleto GetNewBoletoTurista(DateTime dateTime)
-        {
-            throw new NotImplementedException();
-        }
-
         public Boleto GetOne(int Numero)
         {
             throw new NotImplementedException();
         }
 
         public void Insert(Boleto boleto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ObtenerUltimoNumero()
         {
             throw new NotImplementedException();
         }
