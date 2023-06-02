@@ -24,15 +24,18 @@ namespace VentadeBoleto
             {
                 Console.WriteLine("Ingresar Fecha de Salida (dd/mm/aaaa)");
                 var fechaSalida = ObtenerFechaSalida();
+                Console.WriteLine(" ");
                 Console.WriteLine("Ingresar Dias (Tiempo en Días)");
                 var TiempoEnDias = ObtenerTiempoEnDias();
+                Console.WriteLine(" ");
                 Console.WriteLine("Seleccione el tipo de Voleto");
                 Console.WriteLine("1) Boleto Ejecutivo");
                 Console.WriteLine("2) Boleto Turista");
                 var TipoBoleto = Console.ReadLine();
                 var Service = ServiceProvider.ServiceVenta;
                 var NuevoBoleto = Service.VentaBoleto(fechaSalida, TiempoEnDias, TipoBoleto);
-
+                Console.WriteLine(" ");
+                Console.WriteLine("## Resumen de la Operación Realizada ##");
                 Console.WriteLine("Numero de Boleto:" + NuevoBoleto.Numero);
                 Console.WriteLine("Fecha de Salda:" + NuevoBoleto.FechaSalida);
                 Console.WriteLine("Fecha de Regreso:" + NuevoBoleto.CalcularRegreso());
